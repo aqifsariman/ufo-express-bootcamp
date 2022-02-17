@@ -1,0 +1,12 @@
+a {
+  color: white;
+  text-decoration: none;
+}
+
+body {
+  background-color: grey;
+}
+
+li {
+  list-style-type: none;
+}
