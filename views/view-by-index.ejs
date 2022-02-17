@@ -9,26 +9,17 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
 
     <title>UFO SIGHTING REPORT</title>
   </head>
   <body>
     <nav class="navbar bg-dark fixed-top text-h1">
-      <a
-        style="text-decoration: none"
-        class="m-auto text-light"
-        href="/sighting-report"
-        >Report</a
-      >
-      <a style="text-decoration: none" class="m-auto text-light" href="/"
-        >Sightings</a
-      >
-      <a style="text-decoration: none" class="m-auto text-light" href="/"
-        >Shapes</a
-      >
+      <a class="m-auto text-light" href="/sighting-report">Report</a>
+      <a class="m-auto text-light" href="/">Sightings</a>
+      <a class="m-auto text-light" href="/shape">Shapes</a>
     </nav>
-    <div class="mt-5">
+    <div class="mt-5 text-light">
       <h1 class="text-center">SIGHTING</h1>
       <h2>Date and Time: <%=sightingInfo.date_time%></h2>
       <br />
@@ -44,22 +35,11 @@
       <br />
       <h2>Summary: <%= sightingInfo.summary%></h2>
       <br />
-      <button>
-        <a
-          class="text-dark d-flex"
-          style="text-decoration: none"
-          href="/sighting/<%=index%>/edit"
-          >Edit Report</a
+      <div class="d-flex justify-content-center" style="width: 100vw">
+        <a class="text-dark" href="/sighting/<%=index%>/edit"
+          ><button>Edit Report</button></a
         >
-      </button>
-      <button>
-        <a
-          class="text-dark d-flex"
-          style="text-decoration: none"
-          href="/sighting/<%=index%>/delete"
-          >Delete Report</a
-        >
-      </button>
+      </div>
     </div>
   </body>
   <script

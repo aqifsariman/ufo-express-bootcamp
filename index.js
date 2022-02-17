@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-shadow */
 import express from 'express';
@@ -9,7 +10,7 @@ import {
 } from './jsonFileStorage.js';
 
 const app = express();
-const port = 3000;
+const port = 3004;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -42,7 +43,7 @@ const postSighting = (req, res) => {
     read('data.json', (err, jsonContentObj) => {
       const sightingInfo = jsonContentObj.sightings;
       const index = (sightingInfo.length) - 1;
-      res.redirect(`/sighting/${index}`, 301);
+      res.redirect(301, `/sighting/${index}`);
     });
   });
 
@@ -83,7 +84,7 @@ const editSighting = (req, res) => {
         console.log('writing error', writeErr);
       }
 
-      res.render('edit', { sightingInfo });
+      res.render('edit', { sightingInfo, index });
     });
   });
 };
@@ -105,8 +106,30 @@ const deleteSighting = (req, res) => {
         console.log('writing error', writeErr);
       }
 
-      res.render('view-all', { sightingInfo });
+      res.redirect(301, '/');
     });
+  });
+};
+
+const getShapes = (req, res) => {
+  read('data.json', (err, jsonContentObj) => {
+    const sightingInfo = jsonContentObj.sightings;
+
+    res.render('all-shapes', { sightingInfo });
+  });
+};
+
+const sortByShapes = (req, res) => {
+  read('data.json', (err, jsonContentObj) => {
+    const { shape } = req.params;
+    const shapeSorted = [];
+    const sightingInfo = jsonContentObj.sightings;
+    for (let i = 0; i < sightingInfo.length; i++) {
+      if (shape === sightingInfo[i].shape) {
+        shapeSorted.push(sightingInfo[i]);
+      }
+    }
+    res.render('shape', { shapeSorted, sightingInfo, shape });
   });
 };
 
@@ -116,7 +139,8 @@ app.post('/sighting-report', postSighting);
 app.get('/sighting/:index', getSightingByIndex);
 app.get('/sighting/:index/edit', getSightingByIndexForEdit);
 app.put('/sighting/:index/edit', editSighting);
-app.get('/sighting/:index/delete', deleteSighting);
-app.delete('/sighting/:index/delete', deleteSighting);
+app.delete('/sighting/:index', deleteSighting);
+app.get('/shapes', getShapes);
+app.get('/shapes/:shape', sortByShapes);
 
 app.listen(port);

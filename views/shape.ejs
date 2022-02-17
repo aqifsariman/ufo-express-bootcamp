@@ -24,22 +24,20 @@
       class="d-flex flex-row align-items-center justify-content-center"
     >
       <div class="container text-center text-light bg-dark">
-        Sightings List
-        <div class="row mt-5">
+        <%= shape%>
+         <div class="row mt-5">
           <div class="col">Date & Time</div>
-          <div class="col">Shape</div>
+          <div class="col">State</div>
           <div class="col">City</div>
         </div>
         <div class="row mt-3">
-          <% for (let i =0; i< sightingInfo.length;i++) {%>
-          <ul class="d-flex">
-            <li class="col">
-              <a href="/sighting/<%=i%>"><%=sightingInfo[i].date_time %></a>
-            </li>
-            <li class="col"><%=sightingInfo[i].shape %></li>
-            <li class="col"><%=sightingInfo[i].city %></li>
+          <% for(let i=0;i<shapeSorted.length;i++) {%>
+            <ul class="d-flex">
+            <li class="col"><a href="/sighting/<%=i%>"><%= shapeSorted[i].date_time%></a></li> 
+            <li class="col"><%= shapeSorted[i].state%></li> 
+            <li class="col"><%= shapeSorted[i].city%></li> 
           </ul>
-          <% } %>
+            <% } %>
         </div>
       </div>
     </div>

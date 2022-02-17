@@ -9,24 +9,15 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
     <title>UFO SIGHTING REPORT</title>
   </head>
   <body>
     <nav class="navbar bg-dark fixed-top text-h1">
-      <a
-        class="m-auto text-light"
-        style="text-decoration: none"
-        href="/sighting-report"
-        >Report</a
-      >
+      <a class="m-auto text-light" href="/sighting-report">Report</a>
 
-      <a class="m-auto text-light" style="text-decoration: none" href="/"
-        >Sightings</a
-      >
-      <a class="m-auto text-light" style="text-decoration: none" href="/"
-        >Shapes</a
-      >
+      <a class="m-auto text-light" href="/">Sightings</a>
+      <a class="m-auto text-light" href="/shape">Shapes</a>
     </nav>
 
     <div
@@ -91,6 +82,17 @@
         <br /><br />
         <div class="d-flex justify-content-center">
           <input type="submit" value="Submit" />
+          <form
+            action="/sighting/<%=sightingInfo.index%>?_method=DELETE"
+            method="POST"
+          >
+            <input
+              type="submit"
+              value="Delete"
+              class="button"
+              onclick="return confirm('Are you sure you want to permanently delete this sighting report?');"
+            />
+          </form>
         </div>
       </form>
     </div>
