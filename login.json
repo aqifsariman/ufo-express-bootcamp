@@ -1,0 +1,10 @@
+{
+  "login": [
+    {
+      "name": "aqifsariman",
+      "email": "aqifsariman@gmail.com",
+      "password": "123456789",
+      "password-confirmation": "123456789"
+    }
+  ]
+}

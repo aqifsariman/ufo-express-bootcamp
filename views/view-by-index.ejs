@@ -1,50 +1,37 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="/styles.css" />
+<%- include('header') -%>
+<div>
+  <h2 class="mt-5 text-center text-light">Sighting <%= Number(index)+1 %></h2>
+</div>
+<div class="row text-light">
+  <div class="col-6 col-md-12">Date and Time: <%=sightingInfo.date_time%></div>
+</div>
+<br />
+<div class="row text-light">
+  <div class="col-12 col-md-12">
+    Observation: <%=sightingInfo.observation %>
+  </div>
+</div>
+<br />
+<div class="row text-light">
+  <div class="col-6 col-md-3">City: <%= sightingInfo.city%></div>
+  <div class="col-6 col-md-3">State: <%= sightingInfo.state%></div>
+  <div class="col-6 col-md-3">Shape: <%= sightingInfo.shape%></div>
+  <div class="col-6 col-md-3">Duration: <%= sightingInfo.duration%></div>
+</div>
+<br />
+<div class="row text-light">
+  <div class="col-6 col-md-12">Summary: <%= sightingInfo.summary%></div>
+</div>
+<br />
+<div class="row text-light">
+  <div class="col-6 col-md-12">
+    Date and Time of Report Submitted: <%= sightingInfo.date_time_report%>
+  </div>
+</div>
+<div class="d-flex justify-content-center" style="width: 100vw">
+  <a class="text-dark" href="/sighting/<%=index%>/edit"
+    ><button class="btn btn-light mt-5">Edit Report</button></a
+  >
+</div>
 
-    <title>UFO SIGHTING REPORT</title>
-  </head>
-  <body>
-    <nav class="navbar bg-dark fixed-top text-h1">
-      <a class="m-auto text-light" href="/sighting-report">Report</a>
-      <a class="m-auto text-light" href="/">Sightings</a>
-      <a class="m-auto text-light" href="/shape">Shapes</a>
-    </nav>
-    <div class="mt-5 text-light">
-      <h1 class="text-center">SIGHTING</h1>
-      <h2>Date and Time: <%=sightingInfo.date_time%></h2>
-      <br />
-      <h2>Observation: <%=sightingInfo.observation %></h2>
-      <br />
-      <h2>City: <%= sightingInfo.city%></h2>
-      <br />
-      <h2>State: <%= sightingInfo.state%></h2>
-      <br />
-      <h2>Shape: <%= sightingInfo.shape%></h2>
-      <br />
-      <h2>Duration: <%= sightingInfo.duration%></h2>
-      <br />
-      <h2>Summary: <%= sightingInfo.summary%></h2>
-      <br />
-      <div class="d-flex justify-content-center" style="width: 100vw">
-        <a class="text-dark" href="/sighting/<%=index%>/edit"
-          ><button>Edit Report</button></a
-        >
-      </div>
-    </div>
-  </body>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"
-  ></script>
-</html>
+<%- include('footer') -%>

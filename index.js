@@ -21,6 +21,30 @@ app.use(express.static(path.join(__dirname, '/public')));
 // Override POST requests with query param ?_method=PUT to be PUT requests
 app.use(methodOverride('_method'));
 
+const registration = (req, res) => {
+  res.render('register');
+};
+
+const submitRegistration = async (req, res) => {
+  try {
+    add('login.json', 'login', req.body, (err) => {
+      if (err) {
+        res.status(500).send('DB Write Error!');
+      }
+      read('login.json', (err, jsonContentObj) => {
+        console.log(jsonContentObj);
+      });
+      res.redirect(301, 'login');
+    });
+  }
+
+  catch { res.redirect(301, '/register'); }
+};
+
+const login = (req, res) => {
+  res.render('login');
+};
+
 const reportSighting = (req, res) => {
   console.log('Reporting UFO Sighting!');
   res.render('report');
@@ -30,6 +54,7 @@ const getSightingByIndex = (req, res) => {
   read('data.json', (err, jsonContentObj) => {
     const { index } = req.params;
     const sightingInfo = jsonContentObj.sightings[index];
+
     res.render('view-by-index', { sightingInfo, index });
   });
 };
@@ -39,10 +64,12 @@ const postSighting = (req, res) => {
     if (err) {
       res.status(500).send('DB Write Error!');
     }
+
     console.log('Submitting Report!');
     read('data.json', (err, jsonContentObj) => {
       const sightingInfo = jsonContentObj.sightings;
       const index = (sightingInfo.length) - 1;
+
       res.redirect(301, `/sighting/${index}`);
     });
   });
@@ -52,8 +79,37 @@ const postSighting = (req, res) => {
 
 const getAllSightings = (req, res) => {
   read('data.json', (err, jsonContentObj) => {
-    const sightingInfo = jsonContentObj.sightings;
-    res.render('view-all', { sightingInfo });
+    let sightingInfo = jsonContentObj.sightings;
+    let sortBy = 'Default';
+
+    sightingInfo = sightingInfo.map((sighting, index) => ({
+      ...sighting,
+      index,
+    }));
+
+    if (Object.keys(req.query).length > 0) {
+      sortBy = req.query.sortBy;
+      if (sortBy === 'date_time') {
+        sightingInfo = sightingInfo.sort((a, b) => {
+          const regex = /(?<=\s)\S+/;
+          const date1 = a[sortBy].replace(regex, '').split('/')[2];
+          const date2 = b[sortBy].replace(regex, '').split('/')[2];
+
+          if (date1 > date2) {
+            return 1;
+          }
+          return -1;
+        });
+      }
+      else {
+        sightingInfo = sightingInfo.sort((a, b) => (a[sortBy] > b[sortBy] ? 1 : -1));
+      }
+    }
+
+    res.render('view-all', {
+      sightingInfo,
+      sortBy,
+    });
   });
 };
 
@@ -134,13 +190,16 @@ const sortByShapes = (req, res) => {
 };
 
 app.get('/', getAllSightings);
+app.get('/register', registration);
+app.post('/register', submitRegistration);
+app.get('/login', login);
 app.get('/sighting-report', reportSighting);
 app.post('/sighting-report', postSighting);
 app.get('/sighting/:index', getSightingByIndex);
 app.get('/sighting/:index/edit', getSightingByIndexForEdit);
 app.put('/sighting/:index/edit', editSighting);
 app.delete('/sighting/:index', deleteSighting);
-app.get('/shapes', getShapes);
-app.get('/shapes/:shape', sortByShapes);
+app.get('/shape', getShapes);
+app.get('/shape/:shape', sortByShapes);
 
 app.listen(port);
