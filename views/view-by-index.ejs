@@ -3,35 +3,63 @@
   <h2 class="mt-5 text-center text-light">Sighting <%= Number(index)+1 %></h2>
 </div>
 <div class="row text-light">
-  <div class="col-6 col-md-12">Date and Time: <%=sightingInfo.date_time%></div>
+  <div class="col-6 col-md-12">
+    Date and Time:
+    <span style="color: yellow"><%=momentOfSighting%></span>
+  </div>
 </div>
 <br />
 <div class="row text-light">
   <div class="col-12 col-md-12">
-    Observation: <%=sightingInfo.observation %>
+    Observation:
+    <span style="color: yellow"><%=sightingInfo.observation %></span>
   </div>
 </div>
 <br />
 <div class="row text-light">
-  <div class="col-6 col-md-3">City: <%= sightingInfo.city%></div>
-  <div class="col-6 col-md-3">State: <%= sightingInfo.state%></div>
-  <div class="col-6 col-md-3">Shape: <%= sightingInfo.shape%></div>
-  <div class="col-6 col-md-3">Duration: <%= sightingInfo.duration%></div>
-</div>
-<br />
-<div class="row text-light">
-  <div class="col-6 col-md-12">Summary: <%= sightingInfo.summary%></div>
+  <div class="col-6 col-md-3">
+    City: <span style="color: yellow"><%= sightingInfo.city%></span>
+  </div>
+  <div class="col-6 col-md-3">
+    State: <span style="color: yellow"><%= sightingInfo.state%></span>
+  </div>
+  <div class="col-6 col-md-3">
+    Shape: <span style="color: yellow"><%= sightingInfo.shape%></span>
+  </div>
+  <div class="col-6 col-md-3">
+    Duration: <span style="color: yellow"><%= sightingInfo.duration%></span>
+  </div>
 </div>
 <br />
 <div class="row text-light">
   <div class="col-6 col-md-12">
-    Date and Time of Report Submitted: <%= sightingInfo.date_time_report%>
+    Summary: <span style="color: yellow"><%= sightingInfo.summary%></span>
   </div>
 </div>
-<div class="d-flex justify-content-center" style="width: 100vw">
-  <a class="text-dark" href="/sighting/<%=index%>/edit"
-    ><button class="btn btn-light mt-5">Edit Report</button></a
-  >
+<br />
+<div class="row text-light">
+  <div class="col-6 col-md-12">
+    Date and Time of Report Submitted:
+    <span style="color: yellow"><%= sightingInfo.date_time_report%></span>
+  </div>
+</div>
+<br />
+<div class="row text-light">
+  <div class="col-6 col-md-12">
+    Report Submitted: <span style="color: yellow"><%= momentsAgo%></span>
+  </div>
+</div>
+<div class="row" style="width: 100vw">
+  <div class="col-6 col-md-1">
+    <a class="text-dark" href="/sighting/<%=index%>/edit"
+      ><button class="btn btn-light mt-5 ml-5">Edit Report</button></a
+    >
+  </div>
+  <!-- <div class="col-6 col-md-2">
+    <a href="/sighting/index/favorited"
+      ><button class="btn btn-light mt-5">Favorite Report</button></a
+    >
+  </div> -->
 </div>
 
 <%- include('footer') -%>

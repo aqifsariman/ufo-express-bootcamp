@@ -1,11 +1,11 @@
 <%- include('header') -%>
 
-    <table class="table table-dark mt-5">
+    <table class="table bg-transparent mt-5">
       <thead><div >
-      <th scope="col" colspan="3" class="text-center "><h1><%=shape %></h1></th>
+      <th scope="col" colspan="3" class="text-center text-light"><h1><%=shape %></h1></th>
 
       </div>
-        <tr>
+        <tr class="text-light">
           <th scope="col">Date & Time</th>
           <th scope="col">State</th>
           <th scope="col">City</th>
@@ -16,10 +16,10 @@
         <% for(let i=0;i<shapeSorted.length;i++) {%>
        
           <td class="col">
-            <a href="/sighting/<%=i%>"><%= shapeSorted[i].date_time%></a>
+            <a href="/sighting/<%=i%>"><%= allMoments[i]%></a>
           </td>
-          <td class="col"><%= shapeSorted[i].state%></td>
-          <td class="col"><%=shapeSorted[i].city %></td>
+          <td class="col text-light"><%= shapeSorted[i].state%></td>
+          <td class="col text-light"><%=shapeSorted[i].city %></td>
         </tr>
         <% } %>
       </tbody>

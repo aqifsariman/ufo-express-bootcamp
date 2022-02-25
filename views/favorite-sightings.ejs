@@ -2,12 +2,12 @@
 
       </div>
     </div>
-    <table class="table mt-5 bg-transparent">
+    <table class="table table-dark mt-5">
       <thead><div >
-      <th scope="col" colspan="3" class="text-center text-light"><h1>Sightings List</h1></th>
+      <th scope="col" colspan="3" class="text-center "><h1>Sightings List</h1></th>
 
       </div>
-        <tr class="text-light">
+        <tr>
           <th scope="col">Date</th>
           <th scope="col">Shape</th>
           <th scope="col">City</th>
@@ -16,12 +16,12 @@
       <tbody>
          <tr class="d-flex"></tr>
          
-        <% for (let i =0; i< sightingInfo.length;i++) {%>
+        <% for (let i =0; i< uniqueObject.length;i++) {%>
           <td class="col">
-            <a href="/sighting/<%=i%>"><%=allMoments[i] %></a>
+            <a href="/sighting/<%=i%>"><%=uniqueObject[i].date_time %></a>
           </td>
-          <td class="col text-light"><%=sightingInfo[i].shape %></td>
-          <td class="col text-light"><%=sightingInfo[i].city %></td>
+          <td class="col"><%=uniqueObject[i].shape %></td>
+          <td class="col"><%=uniqueObject[i].city %></td>
         </tr>
         <% } %>
       </tbody>
